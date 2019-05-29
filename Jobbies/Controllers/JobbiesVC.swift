@@ -8,21 +8,22 @@
 
 import UIKit
 
+//Free Delegate, Data source and IBOutlet from tableview
 class JobbiesVC: UITableViewController {
-    let itemArray = ["Eat a potato", "Buy a donkey", "Sell some Lichen"]
     
-    
+    let itemArray: [String] = ["Eat a potato", "Buy a donkey", "Sell some Lichen"]
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+        
     }
-    override func numberOfSections(in tableView: UITableView) -> Int {
+
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return itemArray.count
     }
-   
+    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = UITableViewCell()
-        
+        let cell: UITableViewCell = tableView.dequeueReusableCell(withIdentifier: "todoListCell", for: indexPath)
+        cell.textLabel?.text = itemArray[indexPath.row]
         return cell
     }
     
