@@ -11,7 +11,29 @@ import UIKit
 //Free Delegate, Data source and IBOutlet from tableview
 class JobbiesVC: UITableViewController {
     
-    let itemArray: [String] = ["Eat a potato", "Buy a donkey", "Sell some Lichen"]
+    @IBAction func addButtonPressed(_ sender: Any) {
+        var textField = UITextField()
+        //var userEntry: String?
+        
+        let alert = UIAlertController(title: "Add New Item", message: "", preferredStyle: .alert)
+        let action = UIAlertAction(title: "Add Item", style: .default) { (action) in
+            print(textField.text)
+            self.itemArray.append(textField.text!)
+            self.tableView.reloadData()
+        }
+        alert.addTextField { (alertTextField) in
+            alertTextField.placeholder = "Create new Entry"
+            textField = alertTextField
+            print(alertTextField.text ?? "No Entry Info")
+        }
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        
+        alert.addAction(cancelAction)
+        alert.addAction(action)
+        present(alert, animated: true, completion: nil)
+    }
+    
+    var itemArray: [String] = ["Eat a potato", "Buy a donkey", "Sell some Lichen"]
     override func viewDidLoad() {
         super.viewDidLoad()
         
