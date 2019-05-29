@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		44875F2F229F24B50050464A /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44875F2E229F24B40050464A /* Item.swift */; };
 		44EDDD16229EF2240068D896 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44EDDD15229EF2240068D896 /* AppDelegate.swift */; };
 		44EDDD18229EF2240068D896 /* JobbiesVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44EDDD17229EF2240068D896 /* JobbiesVC.swift */; };
 		44EDDD1B229EF2240068D896 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 44EDDD19229EF2240068D896 /* Main.storyboard */; };
@@ -34,6 +35,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		44875F2E229F24B40050464A /* Item.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Item.swift; sourceTree = "<group>"; };
 		44EDDD12229EF2240068D896 /* Jobbies.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Jobbies.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		44EDDD15229EF2240068D896 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		44EDDD17229EF2240068D896 /* JobbiesVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JobbiesVC.swift; sourceTree = "<group>"; };
@@ -74,6 +76,23 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		44875F30229F24C30050464A /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				44875F2E229F24B40050464A /* Item.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		44875F31229F24EC0050464A /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				44EDDD19229EF2240068D896 /* Main.storyboard */,
+				44EDDD1E229EF2290068D896 /* LaunchScreen.storyboard */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
 		44EDDD09229EF2240068D896 = {
 			isa = PBXGroup;
 			children = (
@@ -98,10 +117,10 @@
 			isa = PBXGroup;
 			children = (
 				44EDDD15229EF2240068D896 /* AppDelegate.swift */,
+				44875F30229F24C30050464A /* Model */,
 				44EDDD43229EF3350068D896 /* Controllers */,
-				44EDDD19229EF2240068D896 /* Main.storyboard */,
+				44875F31229F24EC0050464A /* Views */,
 				44EDDD1C229EF2290068D896 /* Assets.xcassets */,
-				44EDDD1E229EF2290068D896 /* LaunchScreen.storyboard */,
 				44EDDD21229EF2290068D896 /* Info.plist */,
 			);
 			path = Jobbies;
@@ -265,6 +284,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				44EDDD18229EF2240068D896 /* JobbiesVC.swift in Sources */,
+				44875F2F229F24B50050464A /* Item.swift in Sources */,
 				44EDDD16229EF2240068D896 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

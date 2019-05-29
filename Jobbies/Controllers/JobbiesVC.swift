@@ -11,20 +11,26 @@ import UIKit
 //Free Delegate, Data source and IBOutlet from tableview
 class JobbiesVC: UITableViewController {
     
+    let dataFilePath = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first?.appendingPathComponent("Items.plist")
+    var itemArray = [Item]()
     let defaults = UserDefaults.standard
     
     @IBAction func addButtonPressed(_ sender: Any) {
         var textField = UITextField()
-        //var userEntry: String?
-        
         let alert = UIAlertController(title: "Add New Item", message: "", preferredStyle: .alert)
+        
         let action = UIAlertAction(title: "Add Item", style: .default) { (action) in
-            print(textField.text)
-            self.itemArray.append(textField.text!)
-            
-            self.defaults.set(self.itemArray, forKey: "JobbiesList")
-            self.tableView.reloadData()
+            print(textField.text!)
+            let newItem = Item()
+            newItem.title = textField.text!
+            self.itemArray.append(newItem)
+            print("Before defaults.set")
+            for i in self.itemArray {
+                print(i.title)
+            }
+            self.saveItems()
         }
+        
         alert.addTextField { (alertTextField) in
             alertTextField.placeholder = "Create new Entry"
             textField = alertTextField
@@ -37,12 +43,36 @@ class JobbiesVC: UITableViewController {
         present(alert, animated: true, completion: nil)
     }
     
-    var itemArray: [String] = ["Eat a potato", "Buy a donkey", "Sell some Lichen"]
+    func saveItems() {
+        let encoder = PropertyListEncoder()
+        do {
+            let data = try encoder.encode(itemArray)
+            try data.write(to: dataFilePath!)
+        } catch {
+            print("Error encoding array of type: \(error)")
+        }
+        self.tableView.reloadData()
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        if let items = UserDefaults.standard.array(forKey: "JobbiesList") as? [String] {
-            itemArray = items
-        }
+        
+        let newItem = Item()
+        newItem.title = "Clamshells"
+        itemArray.append(newItem)
+        let newItem2 = Item()
+        newItem2.title = "Lower Trunk Rotation"
+        newItem2.done = true
+        itemArray.append(newItem2)
+        let newItem3 = Item()
+        newItem3.title = "Cobra Pose"
+        itemArray.append(newItem3)
+        
+        loadItems()
+        
+//        if let items = UserDefaults.standard.array(forKey: "JobbiesList") as? [Item] {
+//            itemArray = items
+//        }
         
     }
 
@@ -52,20 +82,29 @@ class JobbiesVC: UITableViewController {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell: UITableViewCell = tableView.dequeueReusableCell(withIdentifier: "todoListCell", for: indexPath)
-        cell.textLabel?.text = itemArray[indexPath.row]
+        let item = itemArray[indexPath.row]
+        cell.textLabel?.text = item.title
+        cell.accessoryType = item.done ? .checkmark : .none
         return cell
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         print(indexPath.row)
-        
-        if tableView.cellForRow(at: indexPath)?.accessoryType == .checkmark {
-            tableView.cellForRow(at: indexPath)?.accessoryType = .none
-        } else {
-            tableView.cellForRow(at: indexPath)?.accessoryType = .checkmark
-        }
+        itemArray[indexPath.row].done = !itemArray[indexPath.row].done
+        saveItems()
         tableView.deselectRow(at: indexPath, animated: true)
     }
     
+    func loadItems() {
+        if let data = try? Data(contentsOf: dataFilePath!) {
+            let decoder = PropertyListDecoder()
+            do {
+                itemArray = try decoder.decode([Item].self, from: data)
+            } catch {
+                print("Could not decode Item.plist with error: \(error)")
+                
+            }
+        }
+    }
 }
 
