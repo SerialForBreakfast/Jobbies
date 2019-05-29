@@ -11,6 +11,8 @@ import UIKit
 //Free Delegate, Data source and IBOutlet from tableview
 class JobbiesVC: UITableViewController {
     
+    let defaults = UserDefaults.standard
+    
     @IBAction func addButtonPressed(_ sender: Any) {
         var textField = UITextField()
         //var userEntry: String?
@@ -19,6 +21,8 @@ class JobbiesVC: UITableViewController {
         let action = UIAlertAction(title: "Add Item", style: .default) { (action) in
             print(textField.text)
             self.itemArray.append(textField.text!)
+            
+            self.defaults.set(self.itemArray, forKey: "JobbiesList")
             self.tableView.reloadData()
         }
         alert.addTextField { (alertTextField) in
@@ -36,6 +40,9 @@ class JobbiesVC: UITableViewController {
     var itemArray: [String] = ["Eat a potato", "Buy a donkey", "Sell some Lichen"]
     override func viewDidLoad() {
         super.viewDidLoad()
+        if let items = UserDefaults.standard.array(forKey: "JobbiesList") as? [String] {
+            itemArray = items
+        }
         
     }
 
