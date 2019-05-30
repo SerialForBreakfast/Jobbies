@@ -58,25 +58,9 @@ class JobbiesVC: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-//        let newItem = Item()
-//        newItem.title = "Clamshells"
-//        itemArray.append(newItem)
-//        let newItem2 = Item()
-//        newItem2.title = "Lower Trunk Rotation"
-//        newItem2.done = true
-//        itemArray.append(newItem2)
-//        let newItem3 = Item()
-//        newItem3.title = "Cobra Pose"
-//        itemArray.append(newItem3)
-        
-        //loadItems()
-        
-//        if let items = UserDefaults.standard.array(forKey: "JobbiesList") as? [Item] {
-//            itemArray = items
-//        }
-        
+        loadItems()
     }
-
+    
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return itemArray.count
     }
@@ -96,16 +80,14 @@ class JobbiesVC: UITableViewController {
         tableView.deselectRow(at: indexPath, animated: true)
     }
     
-//    func loadItems() {
-//        if let data = try? Data(contentsOf: dataFilePath!) {
-//            let decoder = PropertyListDecoder()
-//            do {
-//                itemArray = try decoder.decode([Item].self, from: data)
-//            } catch {
-//                print("Could not decode Item.plist with error: \(error)")
-//
-//            }
-//        }
-//    }
+    func loadItems() {
+        let request : NSFetchRequest<Item> = Item.fetchRequest()
+        do {
+            itemArray = try context.fetch(request)
+        } catch {
+            print("Error fetching Items from context: \(error)")
+        }
+    }
 }
+
 
