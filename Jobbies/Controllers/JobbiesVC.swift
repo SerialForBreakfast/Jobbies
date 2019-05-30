@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CoreData
 
 //Free Delegate, Data source and IBOutlet from tableview
 class JobbiesVC: UITableViewController {
@@ -14,6 +15,7 @@ class JobbiesVC: UITableViewController {
     let dataFilePath = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first?.appendingPathComponent("Items.plist")
     var itemArray = [Item]()
     let defaults = UserDefaults.standard
+    let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     
     @IBAction func addButtonPressed(_ sender: Any) {
         var textField = UITextField()
@@ -21,8 +23,9 @@ class JobbiesVC: UITableViewController {
         
         let action = UIAlertAction(title: "Add Item", style: .default) { (action) in
             print(textField.text!)
-            let newItem = Item()
+            let newItem = Item(context: self.context)
             newItem.title = textField.text!
+            newItem.done = false
             self.itemArray.append(newItem)
             print("Before defaults.set")
             for i in self.itemArray {
@@ -44,12 +47,10 @@ class JobbiesVC: UITableViewController {
     }
     
     func saveItems() {
-        let encoder = PropertyListEncoder()
         do {
-            let data = try encoder.encode(itemArray)
-            try data.write(to: dataFilePath!)
+            try context.save()
         } catch {
-            print("Error encoding array of type: \(error)")
+            print("Error saving context: \(error)")
         }
         self.tableView.reloadData()
     }
@@ -57,18 +58,18 @@ class JobbiesVC: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let newItem = Item()
-        newItem.title = "Clamshells"
-        itemArray.append(newItem)
-        let newItem2 = Item()
-        newItem2.title = "Lower Trunk Rotation"
-        newItem2.done = true
-        itemArray.append(newItem2)
-        let newItem3 = Item()
-        newItem3.title = "Cobra Pose"
-        itemArray.append(newItem3)
+//        let newItem = Item()
+//        newItem.title = "Clamshells"
+//        itemArray.append(newItem)
+//        let newItem2 = Item()
+//        newItem2.title = "Lower Trunk Rotation"
+//        newItem2.done = true
+//        itemArray.append(newItem2)
+//        let newItem3 = Item()
+//        newItem3.title = "Cobra Pose"
+//        itemArray.append(newItem3)
         
-        loadItems()
+        //loadItems()
         
 //        if let items = UserDefaults.standard.array(forKey: "JobbiesList") as? [Item] {
 //            itemArray = items
@@ -95,16 +96,16 @@ class JobbiesVC: UITableViewController {
         tableView.deselectRow(at: indexPath, animated: true)
     }
     
-    func loadItems() {
-        if let data = try? Data(contentsOf: dataFilePath!) {
-            let decoder = PropertyListDecoder()
-            do {
-                itemArray = try decoder.decode([Item].self, from: data)
-            } catch {
-                print("Could not decode Item.plist with error: \(error)")
-                
-            }
-        }
-    }
+//    func loadItems() {
+//        if let data = try? Data(contentsOf: dataFilePath!) {
+//            let decoder = PropertyListDecoder()
+//            do {
+//                itemArray = try decoder.decode([Item].self, from: data)
+//            } catch {
+//                print("Could not decode Item.plist with error: \(error)")
+//
+//            }
+//        }
+//    }
 }
 
