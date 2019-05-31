@@ -9,7 +9,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Jobbies-->
+        <!--Items-->
         <scene sceneID="Qof-ew-lHd">
             <objects>
                 <tableViewController id="bdy-eR-UJw" customClass="JobbiesVC" customModule="Jobbies" customModuleProvider="target" sceneMemberID="viewController">
@@ -40,7 +40,7 @@
                             <outlet property="delegate" destination="bdy-eR-UJw" id="XfY-1R-HEv"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Jobbies" id="ekt-c1-lbl">
+                    <navigationItem key="navigationItem" title="Items" id="ekt-c1-lbl">
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="dgg-DC-3kP">
                             <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <connections>
@@ -53,16 +53,16 @@
             </objects>
             <point key="canvasLocation" x="2161" y="-239"/>
         </scene>
-        <!--CategoriesVC-->
+        <!--Job Categories-->
         <scene sceneID="Zx1-0a-TV1">
             <objects>
-                <tableViewController id="sDb-nd-nXu" customClass="CategoriesVC" customModule="Jobbies" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController title="Job Categories" id="sDb-nd-nXu" customClass="CategoriesVC" customModule="Jobbies" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="ArF-fx-Asa">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="xd5-vw-lLw">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="categoryListCell" id="xd5-vw-lLw">
                                 <rect key="frame" x="0.0" y="28" width="414" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="xd5-vw-lLw" id="jEn-hb-8ve">
@@ -76,7 +76,14 @@
                             <outlet property="delegate" destination="sDb-nd-nXu" id="Dlk-a7-Puh"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="LUU-Mc-Z4y"/>
+                    <navigationItem key="navigationItem" id="LUU-Mc-Z4y">
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="Arm-6n-GZ6">
+                            <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <connections>
+                                <action selector="addCategoryButtonPressed:" destination="sDb-nd-nXu" id="Jwb-GI-X30"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <segue destination="bdy-eR-UJw" kind="show" identifier="goToItems" id="ufh-qY-tBd"/>
                     </connections>
