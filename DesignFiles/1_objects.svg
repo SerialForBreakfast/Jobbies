@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<svg width="352px" height="413px" viewBox="0 0 352 413" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg">
+  <desc>Created with Lunacy</desc>
+  <g id="ClipLogo">
+    <path d="M0 44C0 19.6995 19.6995 0 44 0C68.3005 0 88 19.6995 88 44C88 68.3005 68.3005 88 44 88C19.6995 88 0 68.3005 0 44Z" transform="translate(88 0)" id="Oval" fill="#FFFFFF" stroke="#000000" stroke-width="10" />
+    <path d="M0 0L263 0L263 312L0 312L0 0Z" transform="translate(0 58)" id="Rectangle" fill="#FFFFFF" stroke="#000000" stroke-width="10" />
+    <path d="M0 0L138 0L138 49L0 49L0 0Z" transform="translate(63 34)" id="Rectangle" fill="#FFFFFF" stroke="#000000" stroke-width="10" />
+    <path d="M0 1L158 1" transform="translate(39 247)" id="Line" fill="none" stroke="#000000" stroke-width="10" />
+    <path d="M0 1L186 1" transform="translate(39 127)" id="Line" fill="none" stroke="#000000" stroke-width="10" />
+    <path d="M0 1L129 1" transform="translate(39 307)" id="Line" fill="none" stroke="#000000" stroke-width="10" />
+    <path d="M0 1L186 1" transform="translate(39 187)" id="Line" fill="none" stroke="#000000" stroke-width="10" />
+    <path d="M0 85.5C0 38.2797 38.2797 0 85.5 0C132.72 0 171 38.2797 171 85.5C171 132.72 132.72 171 85.5 171C38.2797 171 0 132.72 0 85.5Z" transform="translate(181 241.5)" id="Oval" fill="#FFFFFF" stroke="#000000" stroke-width="10" />
+    <g id="Group" transform="translate(227 302)">
+      <path d="M0 0L30 30" transform="translate(0 29)" id="Line" fill="none" stroke="#000000" stroke-width="10" />
+      <path d="M0 0L59 59" transform="matrix(-1 0 0 1 82 0)" id="Line" fill="none" stroke="#000000" stroke-width="10" />
+    </g>
+  </g>
+</svg>
