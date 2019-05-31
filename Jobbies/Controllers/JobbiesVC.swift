@@ -88,6 +88,14 @@ class JobbiesVC: UITableViewController {
             print("Error fetching Items from context: \(error)")
         }
     }
+    
+    
 }
 
 
+extension JobbiesVC: UISearchBarDelegate {
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        let request: NSFetchRequest<Item> = Item.fetchRequest()
+        print(searchBar.text)
+    }
+}

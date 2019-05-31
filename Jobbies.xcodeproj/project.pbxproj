@@ -459,7 +459,7 @@
 		44EDDD3B229EF2290068D896 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_APPICON_NAME = Clipboard;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = C52PFKSQPU;
 				INFOPLIST_FILE = Jobbies/Info.plist;
@@ -477,7 +477,7 @@
 		44EDDD3C229EF2290068D896 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_APPICON_NAME = Clipboard;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = C52PFKSQPU;
 				INFOPLIST_FILE = Jobbies/Info.plist;
