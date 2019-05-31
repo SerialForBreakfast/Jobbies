@@ -13,6 +13,11 @@ class JobbiesVC: UITableViewController {
     
     let dataFilePath = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first?.appendingPathComponent("Items.plist")
     var itemArray = [Item]()
+    var selectedCategory : Category? {
+        didSet {
+            loadItems()
+        }
+    }
     let defaults = UserDefaults.standard
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     
@@ -53,7 +58,6 @@ class JobbiesVC: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        loadItems()
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

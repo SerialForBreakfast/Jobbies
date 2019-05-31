@@ -47,7 +47,7 @@ class CategoriesVC: UITableViewController {
         do {
             try context.save()
         } catch {
-            print("Error saving context: \(error)")
+            print("🚩Error saving context: \(error)")
         }
         self.tableView.reloadData()
     }
@@ -56,7 +56,7 @@ class CategoriesVC: UITableViewController {
         do {
             categoryArray = try context.fetch(request)
         } catch {
-            print("Error fetching Categories from context: \(error)")
+            print("🚩Error fetching Categories from context: \(error)")
         }
         self.tableView.reloadData()
     }
@@ -80,10 +80,18 @@ class CategoriesVC: UITableViewController {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         print(indexPath.row)
-        saveCategories()
+//        saveCategories()
         tableView.deselectRow(at: indexPath, animated: true)
+        performSegue(withIdentifier: "goToItems", sender: self)
     }
-
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let destinationVC = segue.destination as! JobbiesVC
+        if let indexPath = tableView.indexPathForSelectedRow {
+            destinationVC.selectedCategory = categories[indexPath.row]
+        }
+    }
+    
 }
 
 
