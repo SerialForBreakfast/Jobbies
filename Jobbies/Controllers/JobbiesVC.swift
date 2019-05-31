@@ -87,6 +87,7 @@ class JobbiesVC: UITableViewController {
         } catch {
             print("Error fetching Items from context: \(error)")
         }
+        self.tableView.reloadData()
     }
     
     
@@ -102,6 +103,16 @@ extension JobbiesVC: UISearchBarDelegate {
         loadItems(with: request)
         
         tableView.reloadData()
-        
     }
+    
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        if searchBar.text?.count == 0 {
+            print("Count is 0")
+            loadItems()
+            DispatchQueue.main.async {
+                searchBar.resignFirstResponder()
+            }
+        }
+    }
+    
 }
