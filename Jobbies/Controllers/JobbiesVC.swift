@@ -13,6 +13,7 @@ class JobbiesVC: UITableViewController {
     
     let dataFilePath = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first?.appendingPathComponent("Items.plist")
     var itemArray = [Item]()
+    
     var selectedCategory : Category? {
         didSet {
             loadItems()
@@ -29,7 +30,9 @@ class JobbiesVC: UITableViewController {
             let newItem = Item(context: self.context)
             newItem.title = textField.text!
             newItem.done = false
+            newItem.parentCategory = self.selectedCategory
             self.itemArray.append(newItem)
+            
             print("Before defaults.set")
             for i in self.itemArray {
                 print(i.title)
@@ -79,8 +82,22 @@ class JobbiesVC: UITableViewController {
         tableView.deselectRow(at: indexPath, animated: true)
     }
     
-    func loadItems(with request: NSFetchRequest<Item> = Item.fetchRequest()) {
+    func loadItems(with request: NSFetchRequest<Item> = Item.fetchRequest(), predicate: NSPredicate? = nil ){
         //let request : NSFetchRequest<Item> = Item.fetchRequest()
+       
+        if let selectedCategoryName: String = selectedCategory!.name! {
+            let categoryPredicate = NSPredicate(format: "parentCategory.name MATCHES %@", selectedCategoryName)
+            if let additionalPredicate = predicate {
+                request.predicate = NSCompoundPredicate(andPredicateWithSubpredicates: [categoryPredicate, additionalPredicate])
+            } else {
+                request.predicate = categoryPredicate
+            }
+        } else {
+            
+        }
+//        let compoundPredicate = NSCompoundPredicate(andPredicateWithSubpredicates: [categoryPredicate, predicate])
+        
+//request.predicate = compoundPredicate
         do {
             itemArray = try context.fetch(request)
         } catch {
