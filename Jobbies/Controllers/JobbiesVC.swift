@@ -9,7 +9,6 @@
 import UIKit
 import CoreData
 
-//Free Delegate, Data source and IBOutlet from tableview
 class JobbiesVC: UITableViewController {
     
     let dataFilePath = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first?.appendingPathComponent("Items.plist")
@@ -20,7 +19,6 @@ class JobbiesVC: UITableViewController {
     @IBAction func addButtonPressed(_ sender: Any) {
         var textField = UITextField()
         let alert = UIAlertController(title: "Add New Item", message: "", preferredStyle: .alert)
-        
         let action = UIAlertAction(title: "Add Item", style: .default) { (action) in
             print(textField.text!)
             let newItem = Item(context: self.context)
@@ -33,14 +31,12 @@ class JobbiesVC: UITableViewController {
             }
             self.saveItems()
         }
-        
         alert.addTextField { (alertTextField) in
             alertTextField.placeholder = "Create new Entry"
             textField = alertTextField
             print(alertTextField.text ?? "No Entry Info")
         }
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
-        
         alert.addAction(cancelAction)
         alert.addAction(action)
         present(alert, animated: true, completion: nil)
@@ -57,7 +53,6 @@ class JobbiesVC: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         loadItems()
     }
     
@@ -89,10 +84,7 @@ class JobbiesVC: UITableViewController {
         }
         self.tableView.reloadData()
     }
-    
-    
 }
-
 
 extension JobbiesVC: UISearchBarDelegate {
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
@@ -114,5 +106,4 @@ extension JobbiesVC: UISearchBarDelegate {
             }
         }
     }
-    
 }
