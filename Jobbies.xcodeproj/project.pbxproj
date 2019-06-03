@@ -10,8 +10,8 @@
 		279928B4602F6490D785C11B /* Pods_JobbiesTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A53DDC2B52AFD9D9F18F53A /* Pods_JobbiesTests.framework */; };
 		2BA25696F43048CFEB2640EC /* Pods_JobbiesUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D466ECAE076C9DD6253155AC /* Pods_JobbiesUITests.framework */; };
 		440A03C322A1A09900A2516C /* CategoriesVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 440A03C222A1A09900A2516C /* CategoriesVC.swift */; };
-		443073F822A310C3008416D4 /* Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = 443073F722A310C3008416D4 /* Data.swift */; };
-		44875F56229F48910050464A /* DataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 44875F54229F48900050464A /* DataModel.xcdatamodeld */; };
+		443555CC22A578C000E3D0EB /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = 443555CB22A578C000E3D0EB /* Item.swift */; };
+		443555CE22A578C900E3D0EB /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = 443555CD22A578C900E3D0EB /* Category.swift */; };
 		44EDDD16229EF2240068D896 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44EDDD15229EF2240068D896 /* AppDelegate.swift */; };
 		44EDDD18229EF2240068D896 /* JobbiesVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44EDDD17229EF2240068D896 /* JobbiesVC.swift */; };
 		44EDDD1B229EF2240068D896 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 44EDDD19229EF2240068D896 /* Main.storyboard */; };
@@ -43,8 +43,8 @@
 		24B4F7E647C8C074CC0331AE /* Pods-JobbiesUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-JobbiesUITests.debug.xcconfig"; path = "Target Support Files/Pods-JobbiesUITests/Pods-JobbiesUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		4078D10EC3D7618A548DCCF2 /* Pods-Jobbies.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Jobbies.debug.xcconfig"; path = "Target Support Files/Pods-Jobbies/Pods-Jobbies.debug.xcconfig"; sourceTree = "<group>"; };
 		440A03C222A1A09900A2516C /* CategoriesVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = CategoriesVC.swift; path = Jobbies/Controllers/CategoriesVC.swift; sourceTree = SOURCE_ROOT; };
-		443073F722A310C3008416D4 /* Data.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Data.swift; sourceTree = "<group>"; };
-		44875F55229F48900050464A /* DataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = DataModel.xcdatamodel; sourceTree = "<group>"; };
+		443555CB22A578C000E3D0EB /* Item.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Item.swift; sourceTree = "<group>"; };
+		443555CD22A578C900E3D0EB /* Category.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Category.swift; sourceTree = "<group>"; };
 		44EDDD12229EF2240068D896 /* Jobbies.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Jobbies.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		44EDDD15229EF2240068D896 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		44EDDD17229EF2240068D896 /* JobbiesVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JobbiesVC.swift; sourceTree = "<group>"; };
@@ -111,8 +111,8 @@
 		44875F30229F24C30050464A /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				443073F722A310C3008416D4 /* Data.swift */,
-				44875F54229F48900050464A /* DataModel.xcdatamodeld */,
+				443555CD22A578C900E3D0EB /* Category.swift */,
+				443555CB22A578C000E3D0EB /* Item.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -426,9 +426,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				443073F822A310C3008416D4 /* Data.swift in Sources */,
+				443555CC22A578C000E3D0EB /* Item.swift in Sources */,
+				443555CE22A578C900E3D0EB /* Category.swift in Sources */,
 				44EDDD18229EF2240068D896 /* JobbiesVC.swift in Sources */,
-				44875F56229F48910050464A /* DataModel.xcdatamodeld in Sources */,
 				44EDDD16229EF2240068D896 /* AppDelegate.swift in Sources */,
 				440A03C322A1A09900A2516C /* CategoriesVC.swift in Sources */,
 			);
@@ -765,19 +765,6 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
-
-/* Begin XCVersionGroup section */
-		44875F54229F48900050464A /* DataModel.xcdatamodeld */ = {
-			isa = XCVersionGroup;
-			children = (
-				44875F55229F48900050464A /* DataModel.xcdatamodel */,
-			);
-			currentVersion = 44875F55229F48900050464A /* DataModel.xcdatamodel */;
-			path = DataModel.xcdatamodeld;
-			sourceTree = "<group>";
-			versionGroupType = wrapper.xcdatamodel;
-		};
-/* End XCVersionGroup section */
 	};
 	rootObject = 44EDDD0A229EF2240068D896 /* Project object */;
 }

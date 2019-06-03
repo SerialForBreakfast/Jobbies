@@ -7,30 +7,33 @@
 //
 
 import UIKit
-import CoreData
+import RealmSwift
 
 class CategoriesVC: UITableViewController {
-    var categoryArray = [Category]()
+    var categories: Results<Category>!
     let defaults = UserDefaults.standard
-    let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
-
+    let realm = try! Realm()
+    
+    func loadCategories() {
+        categories = realm.objects(Category.self)
+        tableView.reloadData()
+        
+    }
+    
     
     @IBAction func addCategoryButtonPressed(_ sender: UIBarButtonItem) {
         var textField = UITextField()
         let alert = UIAlertController(title: "Add New Item", message: "", preferredStyle: .alert)
         let action = UIAlertAction(title: "Add Item", style: .default) { (action) in
             print(textField.text!)
-//            let newItem = Item(context: self.context)
-//            newItem.title = textField.text!
-//            newItem.done = false
-            let newCategory = Category(context: self.context)
+            let newCategory = Category()
             newCategory.name = textField.text!
-            self.categoryArray.append(newCategory)
-            
-            for i in self.categoryArray {
-                print(i.name)
-            }
-            self.saveCategories()
+            //.categoryArray.append(newCategory)
+//
+//            for i in self.categoryArray {
+//                print(i.name)
+//            }
+            self.save(category: newCategory)
         }
         alert.addTextField { (alertTextField) in
             alertTextField.placeholder = "Create new Category"
@@ -43,23 +46,25 @@ class CategoriesVC: UITableViewController {
         present(alert, animated: true, completion: nil)
     }
     
-    func saveCategories() {
+    func save(category: Category) {
         do {
-            try context.save()
+            try realm.write {
+                realm.add(category)
+            }
         } catch {
             print("🚩Error saving context: \(error)")
         }
         self.tableView.reloadData()
     }
-    func loadCategories(with request: NSFetchRequest<Category> = Category.fetchRequest()) {
-        //let request : NSFetchRequest<Item> = Item.fetchRequest()
-        do {
-            categoryArray = try context.fetch(request)
-        } catch {
-            print("🚩Error fetching Categories from context: \(error)")
-        }
-        self.tableView.reloadData()
-    }
+//    func loadCategories(with request: NSFetchRequest<Category> = Category.fetchRequest()) {
+//        let request : NSFetchRequest<Item> = Item.fetchRequest()
+//        do {
+//            categoryArray = try context.fetch(request)
+//        } catch {
+//            print("🚩Error fetching Categories from context: \(error)")
+//        }
+//        self.tableView.reloadData()
+//    }  
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -68,12 +73,12 @@ class CategoriesVC: UITableViewController {
 
     // MARK: - Table view data source
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return categoryArray.count
+        return categories.count
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell: UITableViewCell = tableView.dequeueReusableCell(withIdentifier: "categoryListCell", for: indexPath)
-        let category = categoryArray[indexPath.row]
+        let category = categories[indexPath.row]
         cell.textLabel?.text = category.name
         return cell
     }
@@ -88,31 +93,31 @@ class CategoriesVC: UITableViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         let destinationVC = segue.destination as! JobbiesVC
         if let indexPath = tableView.indexPathForSelectedRow {
-            destinationVC.selectedCategory = categoryArray[indexPath.row]
+            destinationVC.selectedCategory = categories[indexPath.row]
         }
     }
     
 }
 
-
-extension CategoriesVC: UISearchBarDelegate {
-    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        let request: NSFetchRequest<Category> = Category.fetchRequest()
-        print(searchBar.text)
-        request.predicate = NSPredicate(format: "title CONTAINS[cd] %@", searchBar.text!)
-        request.sortDescriptors = [NSSortDescriptor(key: "title", ascending: true)]
-        loadCategories(with: request)
-        
-        tableView.reloadData()
-    }
-    
-    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        if searchBar.text?.count == 0 {
-            print("Count is 0")
-            loadCategories()
-            DispatchQueue.main.async {
-                searchBar.resignFirstResponder()
-            }
-        }
-    }
-}
+//
+//extension CategoriesVC: UISearchBarDelegate {
+//    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+//        let request: NSFetchRequest<Category> = Category.fetchRequest()
+//        print(searchBar.text)
+//        request.predicate = NSPredicate(format: "title CONTAINS[cd] %@", searchBar.text!)
+//        request.sortDescriptors = [NSSortDescriptor(key: "title", ascending: true)]
+//        loadCategories(with: request)
+//
+//        tableView.reloadData()
+//    }
+//
+//    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+//        if searchBar.text?.count == 0 {
+//            print("Count is 0")
+//            loadCategories()
+//            DispatchQueue.main.async {
+//                searchBar.resignFirstResponder()
+//            }
+//        }
+//    }
+//}
