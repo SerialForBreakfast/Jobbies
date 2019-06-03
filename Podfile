@@ -7,6 +7,7 @@ target 'Jobbies' do
 
   # Pods for Jobbies
   pod 'RealmSwift'  
+  pod 'SwipeCellKit'
 
   target 'JobbiesTests' do
     inherit! :search_paths

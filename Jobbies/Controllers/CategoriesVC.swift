@@ -8,6 +8,7 @@
 
 import UIKit
 import RealmSwift
+import SwipeCellKit
 
 class CategoriesVC: UITableViewController {
     var categories: Results<Category>?
@@ -29,10 +30,10 @@ class CategoriesVC: UITableViewController {
             let newCategory = Category()
             newCategory.name = textField.text!
             //.categoryArray.append(newCategory)
-//
-//            for i in self.categoryArray {
-//                print(i.name)
-//            }
+            //
+            //            for i in self.categoryArray {
+            //                print(i.name)
+            //            }
             self.save(category: newCategory)
         }
         alert.addTextField { (alertTextField) in
@@ -56,28 +57,30 @@ class CategoriesVC: UITableViewController {
         }
         self.tableView.reloadData()
     }
-//    func loadCategories(with request: NSFetchRequest<Category> = Category.fetchRequest()) {
-//        let request : NSFetchRequest<Item> = Item.fetchRequest()
-//        do {
-//            categoryArray = try context.fetch(request)
-//        } catch {
-//            print("🚩Error fetching Categories from context: \(error)")
-//        }
-//        self.tableView.reloadData()
-//    }  
+    //    func loadCategories(with request: NSFetchRequest<Category> = Category.fetchRequest()) {
+    //        let request : NSFetchRequest<Item> = Item.fetchRequest()
+    //        do {
+    //            categoryArray = try context.fetch(request)
+    //        } catch {
+    //            print("🚩Error fetching Categories from context: \(error)")
+    //        }
+    //        self.tableView.reloadData()
+    //    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         loadCategories()
+        tableView.rowHeight = 100.0
     }
-
+    
     // MARK: - Table view data source
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return categories?.count ?? 1
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell: UITableViewCell = tableView.dequeueReusableCell(withIdentifier: "categoryListCell", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "categoryListCell", for: indexPath) as! SwipeTableViewCell
+        cell.delegate = self
         cell.textLabel?.text = categories?[indexPath.row].name ?? "No Categories available yet"
         return cell
     }
@@ -118,3 +121,32 @@ class CategoriesVC: UITableViewController {
 //        }
 //    }
 //}
+extension CategoriesVC: SwipeTableViewCellDelegate {
+    func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath, for orientation: SwipeActionsOrientation) -> [SwipeAction]? {
+        guard orientation == .right else { return nil }
+        
+        let deleteAction = SwipeAction(style: .destructive, title: "Delete") { action, indexPath in
+            // handle action by updating model with deletion
+            print("Item Deleted")
+            if let categoryForDeletion = self.categories?[indexPath.row] {
+                do {
+                    try self.realm.write {
+                        self.realm.delete(categoryForDeletion)
+                    }
+                } catch {
+                    print("Error Deleting Category: \(error)")
+                }
+            }
+        }
+        
+        // customize the action appearance
+        deleteAction.image = UIImage(named: "trash-icon")
+        
+        return [deleteAction]
+    }
+    func tableView(_ tableView: UITableView, editActionsOptionsForRowAt indexPath: IndexPath, for orientation: SwipeActionsOrientation) -> SwipeOptions {
+        var options = SwipeTableOptions()
+        options.expansionStyle = .destructive
+        return options
+    }
+}
