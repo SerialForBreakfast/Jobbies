@@ -10,7 +10,7 @@ import UIKit
 import RealmSwift
 
 class CategoriesVC: UITableViewController {
-    var categories: Results<Category>!
+    var categories: Results<Category>?
     let defaults = UserDefaults.standard
     let realm = try! Realm()
     
@@ -73,13 +73,12 @@ class CategoriesVC: UITableViewController {
 
     // MARK: - Table view data source
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return categories.count
+        return categories?.count ?? 1
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell: UITableViewCell = tableView.dequeueReusableCell(withIdentifier: "categoryListCell", for: indexPath)
-        let category = categories[indexPath.row]
-        cell.textLabel?.text = category.name
+        cell.textLabel?.text = categories?[indexPath.row].name ?? "No Categories available yet"
         return cell
     }
     
@@ -93,7 +92,7 @@ class CategoriesVC: UITableViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         let destinationVC = segue.destination as! JobbiesVC
         if let indexPath = tableView.indexPathForSelectedRow {
-            destinationVC.selectedCategory = categories[indexPath.row]
+            destinationVC.selectedCategory = categories?[indexPath.row]
         }
     }
     
