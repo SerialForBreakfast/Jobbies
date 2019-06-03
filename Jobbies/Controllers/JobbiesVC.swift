@@ -11,7 +11,6 @@ import RealmSwift
 
 class JobbiesVC: UITableViewController {
     let realm = try! Realm()
-    let dataFilePath = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first?.appendingPathComponent("Items.plist")
     var todoItems: Results<Item>?
     
     var selectedCategory : Category? {
@@ -20,7 +19,6 @@ class JobbiesVC: UITableViewController {
         }
     }
     let defaults = UserDefaults.standard
-    let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     
     @IBAction func addButtonPressed(_ sender: Any) {
         var textField = UITextField()
@@ -78,7 +76,8 @@ class JobbiesVC: UITableViewController {
         if let item = todoItems?[indexPath.row] {
             do {
                 try realm.write {
-                    item.done = !item.done
+//                    item.done = !item.done
+                    realm.delete(item)
                 }
             } catch {
                 print("Error changing done status \(error)")
