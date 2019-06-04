@@ -8,6 +8,7 @@ target 'Jobbies' do
   # Pods for Jobbies
   pod 'RealmSwift'  
   pod 'SwipeCellKit'
+  pod 'ChameleonFramework/Swift', :git => 'https://github.com/ViccAlexander/Chameleon.git'
 
   target 'JobbiesTests' do
     inherit! :search_paths
