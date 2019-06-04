@@ -12,6 +12,7 @@
 		440A03C322A1A09900A2516C /* CategoriesVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 440A03C222A1A09900A2516C /* CategoriesVC.swift */; };
 		443555CC22A578C000E3D0EB /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = 443555CB22A578C000E3D0EB /* Item.swift */; };
 		443555CE22A578C900E3D0EB /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = 443555CD22A578C900E3D0EB /* Category.swift */; };
+		4480D58E22A5E458002BE330 /* SwipeTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4480D58D22A5E458002BE330 /* SwipeTableViewController.swift */; };
 		44EDDD16229EF2240068D896 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44EDDD15229EF2240068D896 /* AppDelegate.swift */; };
 		44EDDD18229EF2240068D896 /* JobbiesVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44EDDD17229EF2240068D896 /* JobbiesVC.swift */; };
 		44EDDD1B229EF2240068D896 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 44EDDD19229EF2240068D896 /* Main.storyboard */; };
@@ -45,6 +46,7 @@
 		440A03C222A1A09900A2516C /* CategoriesVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = CategoriesVC.swift; path = Jobbies/Controllers/CategoriesVC.swift; sourceTree = SOURCE_ROOT; };
 		443555CB22A578C000E3D0EB /* Item.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Item.swift; sourceTree = "<group>"; };
 		443555CD22A578C900E3D0EB /* Category.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Category.swift; sourceTree = "<group>"; };
+		4480D58D22A5E458002BE330 /* SwipeTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwipeTableViewController.swift; sourceTree = "<group>"; };
 		44EDDD12229EF2240068D896 /* Jobbies.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Jobbies.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		44EDDD15229EF2240068D896 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		44EDDD17229EF2240068D896 /* JobbiesVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JobbiesVC.swift; sourceTree = "<group>"; };
@@ -182,8 +184,9 @@
 		44EDDD43229EF3350068D896 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				44EDDD17229EF2240068D896 /* JobbiesVC.swift */,
 				440A03C222A1A09900A2516C /* CategoriesVC.swift */,
+				44EDDD17229EF2240068D896 /* JobbiesVC.swift */,
+				4480D58D22A5E458002BE330 /* SwipeTableViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -432,6 +435,7 @@
 				443555CE22A578C900E3D0EB /* Category.swift in Sources */,
 				44EDDD18229EF2240068D896 /* JobbiesVC.swift in Sources */,
 				44EDDD16229EF2240068D896 /* AppDelegate.swift in Sources */,
+				4480D58E22A5E458002BE330 /* SwipeTableViewController.swift in Sources */,
 				440A03C322A1A09900A2516C /* CategoriesVC.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
