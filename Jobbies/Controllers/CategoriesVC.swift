@@ -24,11 +24,9 @@ class CategoriesVC: SwipeTableViewController {
             print(textField.text!)
             let newCategory = Category()
             newCategory.name = textField.text!
-            //.categoryArray.append(newCategory)
-            //
-            //            for i in self.categoryArray {
-            //                print(i.name)
-            //            }
+            let bgColor = UIColor.randomFlat
+            newCategory.hexColor = bgColor.hexValue()
+            
             self.save(category: newCategory)
         }
         alert.addTextField { (alertTextField) in
@@ -101,7 +99,9 @@ class CategoriesVC: SwipeTableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = super.tableView(tableView, cellForRowAt: indexPath)
         cell.textLabel?.text = categories?[indexPath.row].name ?? "No Categories added yet"
-        cell.backgroundColor = UIColor.randomFlat.hexValue()
+        
+        cell.backgroundColor = UIColor(hexString: (categories?[indexPath.row].hexColor)!)
+        
         return cell
     }
     
@@ -114,6 +114,7 @@ class CategoriesVC: SwipeTableViewController {
         let destinationVC = segue.destination as! JobbiesVC
         if let indexPath = tableView.indexPathForSelectedRow {
             destinationVC.selectedCategory = categories?[indexPath.row]
+            destinationVC.title = categories?[indexPath.row].name
         }
     }
 }

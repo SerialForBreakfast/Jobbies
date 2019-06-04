@@ -31,6 +31,9 @@ class JobbiesVC: SwipeTableViewController {
                         let newItem = Item()
                         newItem.title = textField.text!
                         newItem.dateCreated = Date()
+                        
+                        let bgColor = UIColor.randomFlat
+                        newItem.hexColor = bgColor.hexValue()
                         currentCategory.items.append(newItem)
                     }
                 } catch {
@@ -69,6 +72,9 @@ class JobbiesVC: SwipeTableViewController {
         } else {
             cell.textLabel?.text = "No items added yet"
         }
+        
+        cell.backgroundColor = UIColor(hexString: (todoItems?[indexPath.row].hexColor)!)
+        
         return cell
     }
     
